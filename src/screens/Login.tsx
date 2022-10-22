@@ -1,14 +1,14 @@
 import React, { FC, useEffect, useState } from "react"
-import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Alert } from "react-native"
+import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, TextInput, StyleSheet, Text, TouchableOpacity, View, Alert } from "react-native"
 import CommonButton from "../components/CommonButton";
 import TextinputFunction from "../components/TextinputFunction";
 import { useNavigation } from "@react-navigation/native"
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const Login = (props: any) => {
+const Login = ({ navigation }: { navigation: any }) => {
   const [Email, SetEmail] = useState("")
   const [Password, SetPassword] = useState("")
-  const [propsdata, setprops] = useState(props)
+  // const [propsdata, setprops] = useState(props)
 
   const Emailfunction = (text: string) => {
     // console.log("props",props)
@@ -29,7 +29,6 @@ const Login = (props: any) => {
   }
 
   const sumitButton = () => {
-    console.log("props", propsdata)
     if (!Email) {
       Alert.alert("Please enter email")
     } else if (!Password) {
@@ -40,7 +39,7 @@ const Login = (props: any) => {
           if (res?.additionalUserInfo) {
             storeandupdate_data(res)
             console.log("Login res", res)
-            propsdata.navigation.navigate("AppStack")
+            navigation.navigate("AppStack")
           }
         })
         .catch(error => {
@@ -60,34 +59,56 @@ const Login = (props: any) => {
         <KeyboardAvoidingView style={{ flex: 1 }} enabled behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <View style={styles.Container}>
             <Text style={styles.TextStyle}>Demo App</Text>
-            <TextinputFunction
-              testID="EmailInput"
+
+            <TextInput
+              testID={"EmailInput"}
+              placeholder={'Email'}
+              placeholderTextColor={'black'}
+              value={Email}
+              onChangeText={(text: string) => Emailfunction(text)}
+            >
+            </TextInput>
+            {/* <TextinputFunction
+              testID={"EmailInput"}
               placeholder={'Email'}
               placeholderTextColor={'black'}
               islabel={true}
               keyboardTypenumber={false}
               value={Email}
               onChangeText={(text: string) => Emailfunction(text)}
-            />
+            /> */}
 
-            <TextinputFunction
-              testID="PasswordInput"
+            <TextInput
+              testID={"PasswordInput"}
+              placeholder={'Password'}
+              placeholderTextColor={'black'}
+              value={Password}
+              onChangeText={(text: string) => Passwodfunction(text)}
+            ></TextInput>
+            {/* <TextinputFunction
+              testID={"PasswordInput"}
               placeholder={'Password'}
               placeholderTextColor={'black'}
               islabel={true}
               keyboardTypenumber={false}
               value={Password}
               onChangeText={(text: string) => Passwodfunction(text)}
-            />
-
-            <CommonButton
-              testID="LoginButton"
+            /> */}
+            <TouchableOpacity style={{ height: "8%", width: "100%", alignItems: 'center', justifyContent: "center" }}
+              testID={"LoginButton"}
+              onPress={() => { sumitButton() }}
+            >
+              <Text><Text style={{ fontWeight: "bold" }}>Login</Text></Text>
+            </TouchableOpacity>
+            {/* <CommonButton
+              testID={"LoginButton"}
               text="Login"
               style={{ width: '80%', marginTop: 10, }}
               onpress={() => { sumitButton() }}
-            />
+            /> */}
             <TouchableOpacity style={{ height: "8%", width: "100%", alignItems: 'center', justifyContent: "center" }}
-              onPress={() => { props.navigation.navigate("SignUp") }}
+              onPress={() => { navigation.navigate("SignUp") }}
+              testID={"SignupNavigationButton"}
             >
               <Text>Don't have an account ? <Text style={{ fontWeight: "bold" }}>SIGN UP</Text></Text>
             </TouchableOpacity>
