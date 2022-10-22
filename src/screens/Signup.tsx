@@ -8,7 +8,7 @@ const SignUp = ({ navigation }: { navigation: any }) => {
   const [Email, SetEmail] = useState("")
   const [Password, SetPassword] = useState("")
   const [userName, SetName] = useState("")
-
+  const [ChageColor, SetChageColor] = useState("")
   const Emailfunction = (text: string) => {
     SetEmail(text)
   }
@@ -55,6 +55,10 @@ const SignUp = ({ navigation }: { navigation: any }) => {
       });
   }
 
+  const chnageColor = (text: string) => {
+    return SetChageColor(text)
+  }
+
   return (
     <SafeAreaView style={styles.MainContainer}>
       <ScrollView keyboardShouldPersistTaps={'never'} contentContainerStyle={styles.scrollViewStyle}>
@@ -71,18 +75,22 @@ const SignUp = ({ navigation }: { navigation: any }) => {
               onChangeText={(text: string) => SetNamefunction(text)}
             /> */}
             <TextInput
+              style={{ backgroundColor: "white", color: "white", marginBottom: 10, width: "90%", borderWidth: 1, height: 45, paddingStart: 10, borderColor: ChageColor == "Name" ? "green" : "black", borderRadius: 3, color: "black" }}
               testID={"Name"}
               placeholder={'Name'}
               placeholderTextColor={'black'}
               value={userName}
+              onFocus={() => { chnageColor("Name") }}
               onChangeText={(text: string) => SetNamefunction(text)}
             >
             </TextInput>
             <TextInput
+              style={{ backgroundColor: "white", color: "white", marginBottom: 10, width: "90%", borderWidth: 1, height: 45, paddingStart: 10, borderColor: ChageColor == "Email" ? "green" : "black", borderRadius: 3, color: "black" }}
               testID={"EmailInput"}
               placeholder={'Email'}
               placeholderTextColor={'black'}
               value={Email}
+              onFocus={() => { chnageColor("Email") }}
               onChangeText={(text: string) => Emailfunction(text)}
             >
             </TextInput>
@@ -96,10 +104,12 @@ const SignUp = ({ navigation }: { navigation: any }) => {
               onChangeText={(text: string) => Emailfunction(text)}
             /> */}
             <TextInput
+              style={{ backgroundColor: "white", color: "white", marginBottom: 10, width: "90%", borderWidth: 1, height: 45, paddingStart: 10, borderColor: ChageColor == "Password" ? "green" : "black", borderRadius: 3, color: "black" }}
               testID={"PasswordInput"}
               placeholder={'Password'}
               placeholderTextColor={'black'}
               value={Password}
+              onFocus={() => { chnageColor("Password") }}
               onChangeText={(text: string) => Passwodfunction(text)}
             ></TextInput>
 
@@ -112,13 +122,19 @@ const SignUp = ({ navigation }: { navigation: any }) => {
               onChangeText={(text: string) => Passwodfunction(text)}
             /> */}
 
-            <CommonButton
+            <TouchableOpacity style={{ width: "80%", height: 45, backgroundColor: "#9DDDFF", borderRadius: 10, alignItems: "center", justifyContent: 'center', borderWidth: .5 }}
+              testID={"Register"}
+              onPress={() => { register() }}
+            >
+              <Text><Text style={{ fontWeight: "bold" }}>Register</Text></Text>
+            </TouchableOpacity>
+            {/* <CommonButton
               text="Register"
               style={{ width: '80%', marginTop: 10, }}
               onpress={() => {
                 register()
               }}
-            />
+            /> */}
             <TouchableOpacity style={{ height: "8%", width: "100%", alignItems: 'center', justifyContent: "center" }}
               onPress={() => navigation.navigate("Login")}
               testID="Nav.Login"

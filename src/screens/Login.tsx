@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Login = ({ navigation }: { navigation: any }) => {
   const [Email, SetEmail] = useState("")
   const [Password, SetPassword] = useState("")
-  // const [propsdata, setprops] = useState(props)
+  const [ChageColor, SetChageColor] = useState("")
 
   const Emailfunction = (text: string) => {
     // console.log("props",props)
@@ -52,7 +52,9 @@ const Login = ({ navigation }: { navigation: any }) => {
         });
     }
   }
-
+  const chnageColor = (text: string) => {
+    return SetChageColor(text)
+  }
   return (
     <SafeAreaView style={styles.MainContainer}>
       <ScrollView keyboardShouldPersistTaps={'never'} contentContainerStyle={styles.scrollViewStyle}>
@@ -61,10 +63,12 @@ const Login = ({ navigation }: { navigation: any }) => {
             <Text style={styles.TextStyle}>Demo App</Text>
 
             <TextInput
+              style={{ backgroundColor: "white", color: "white", marginBottom: 10, width: "90%", borderWidth: 1, height: 45, paddingStart: 10, borderColor: ChageColor == "Email" ? "green" : "black", borderRadius: 3, color: "black" }}
               testID={"EmailInput"}
               placeholder={'Email'}
               placeholderTextColor={'black'}
               value={Email}
+              onFocus={() => { chnageColor("Email") }}
               onChangeText={(text: string) => Emailfunction(text)}
             >
             </TextInput>
@@ -79,10 +83,13 @@ const Login = ({ navigation }: { navigation: any }) => {
             /> */}
 
             <TextInput
+              style={{ backgroundColor: "white", color: "white", marginBottom: 10, width: "90%", borderWidth: 1, height: 45, paddingStart: 10, borderColor: ChageColor == "Password" ? "green" : "black", borderRadius: 3, color: "black" }}
               testID={"PasswordInput"}
               placeholder={'Password'}
               placeholderTextColor={'black'}
               value={Password}
+              onFocus={() => { chnageColor("Password") }}
+              secureTextEntry={true}
               onChangeText={(text: string) => Passwodfunction(text)}
             ></TextInput>
             {/* <TextinputFunction
@@ -94,7 +101,7 @@ const Login = ({ navigation }: { navigation: any }) => {
               value={Password}
               onChangeText={(text: string) => Passwodfunction(text)}
             /> */}
-            <TouchableOpacity style={{ height: "8%", width: "100%", alignItems: 'center', justifyContent: "center" }}
+            <TouchableOpacity style={{ width: "80%", height: 45, backgroundColor: "#9DDDFF", borderRadius: 10, alignItems: "center", justifyContent: 'center', borderWidth: .5 }}
               testID={"LoginButton"}
               onPress={() => { sumitButton() }}
             >
@@ -134,7 +141,7 @@ const styles = StyleSheet.create({
   TextStyle: {
     fontWeight: "bold",
     fontSize: 22,
-    marginBottom: 10
+    marginBottom: 20
   },
   scrollViewStyle: {
     alignContent: 'center',
