@@ -9,7 +9,7 @@ import axios from "axios";
 import Header from "../common/Header";
 import Card from "../common/Card";
 import Loader from "../common/Loader";
-const PostDatilScreen = (props: any) => {
+const PostDatilScreen = (props: any,) => {
     const [Field, setField] = useState("Comments")
     const [CommentData, setCommentdata] = useState("Comments")
     const [PhotoList, SetPhotoList] = useState([])
@@ -17,16 +17,16 @@ const PostDatilScreen = (props: any) => {
 
     // console.log("props", props)
 
-    useFocusEffect(
-        React.useCallback(() => {
-            console.log("props", JSON.stringify(props.route.params.data.userId))
-            LoadCommentData()
-        }, [props])
-    );
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         console.log("props", JSON.stringify(props.route.params.data.userId))
+    //         LoadCommentData()
+    //     }, [props])
+    // );
 
     useEffect(() => {
         getPhotos()
-        // LoadCommentData()
+        LoadCommentData()
     }, [])
 
     const getPhotos = () => {

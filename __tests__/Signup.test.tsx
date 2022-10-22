@@ -30,3 +30,24 @@ it('navigation to Login', () => {
     fireEvent.press(getByTestId('Nav.Login'));
     expect(navigation.navigate).toBeCalledWith('Login');
 });
+
+it('show error messages', () => {
+    let navigation = {
+        navigate: jest.fn(),
+    };
+
+    const { getByTestId, getByText } = render(<SignUp navigation={navigation} />);
+    fireEvent.press(getByTestId('Register'));
+});
+
+it('check submission', () => {
+    let navigation = {
+        navigate: jest.fn(),
+    };
+
+    const { getByTestId, getByText } = render(<SignUp navigation={navigation} />);
+    fireEvent.changeText(getByTestId('Name'), 'abc');
+    fireEvent.changeText(getByTestId('EmailInput'), 'abc');
+    fireEvent.changeText(getByTestId('PasswordInput'), '123');
+    fireEvent.press(getByTestId('Register'));
+});
