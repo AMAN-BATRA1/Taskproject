@@ -3,10 +3,8 @@ import Login from "../src/screens/Login"
 import TextinputFunction from "../src/components/TextinputFunction"
 import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react-native';
 import auth from '@react-native-firebase/auth';
-import { TextInput } from 'react-native-paper';
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
-import HomeScreen from "../src/screens/HomeScreen";
 import PostDatilScreen from "../src/screens/PostDetailScreen";
 
 const mockAxios = new MockAdapter(axios);
@@ -16,10 +14,8 @@ it("Comment Api test", () => {
     let navigation = {
         navigate: jest.fn(),
     };
-    let props = {
-        props: jest.fn(),
-    }
-    const { getByTestId, getByText, getAllByTestId } = render(<PostDatilScreen navigation={navigation} props={props} />);
+
+    const { getByTestId, getByText, getAllByTestId } = render(<PostDatilScreen navigation={navigation} />);
     mockAxios
         .onGet("https://jsonplaceholder.typicode.com/posts/1/comments")
         .reply(200, {
@@ -35,10 +31,8 @@ it("Photos Api test", () => {
     let navigation = {
         navigate: jest.fn(),
     };
-    let props = {
-        props: jest.fn(),
-    }
-    const { getByTestId, getByText, getAllByTestId } = render(<PostDatilScreen navigation={navigation} props={props} />);
+
+    const { getByTestId, getByText, getAllByTestId } = render(<PostDatilScreen navigation={navigation} />);
     mockAxios
         .onGet("https://jsonplaceholder.typicode.com/posts/1/photos")
         .reply(200, {

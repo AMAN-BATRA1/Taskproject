@@ -118,7 +118,7 @@ const PostDatilScreen = (props: any,) => {
                         goBack={() => { props.navigation.goBack() }} />
                     <Card
                         disable={true}
-                        numberOfLines={false}
+                        // numberOfLines={false}
                         propsdata={props.route.params.data}
                     ></Card>
                     <View style={styles.ButtonView}>
@@ -136,7 +136,7 @@ const PostDatilScreen = (props: any,) => {
                         keyExtractor={(item, index) => index.toString()}
                         ListFooterComponent={FoterStyle}
                     ></FlatList> :
-                        <View style={{ flexWrap: "wrap", flex: 1 }}>
+                        <View style={{ flex: 1 }}>
                             <FlatList
                                 numColumns={3}
                                 data={PhotoList}
